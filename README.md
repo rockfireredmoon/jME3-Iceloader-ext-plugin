@@ -22,7 +22,7 @@ depend on the usage.
 
 ## Usage
 
-After installation of the plugin, a new *Library* named **Iceloader** 
+After installation of the plugin, a new *Library* named **Iceloader-Ext** 
 will be available to add to your project. 
 
 1. Right click your project in the Projects view, select *Properties*.
