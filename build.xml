@@ -9,14 +9,14 @@
     <target name="release" depends="files-init,javadoc" if="has.release.dir">
         
         <echo>Creating releases folder (classes, source and Javadoc archives)</echo>  
-        <zip basedir="build/javadoc" file="release/docs/Iceloaderext-javadoc.zip"/>        
-        <zip basedir="src" file="release/sources/Iceloaderext-src.zip"/>
+        <zip basedir="build/javadoc" file="release/docs/Iceloader-Ext-javadoc.zip"/>        
+        <zip basedir="src" file="release/sources/Iceloader-Ext-src.zip"/>
         <copy todir="${release.dir}/libs" overwrite="true">
-            <fileset dir="../sharelib">
+            <fileset dir="lib">
                 <patternset includes="*.jar"/>
             </fileset>
-        </copy> 
-        <copy tofile="${release.dir}/libs/Iceloaderext-classes.jar" file="${cluster}/${module.jar}"/>
+        </copy>
+        <copy tofile="${release.dir}/libs/Iceloader-Ext-classes.jar" file="${cluster}/${module.jar}"/>
         
         <mkdir dir="${cluster}"/>
         <copy todir="${cluster}" overwrite="true">

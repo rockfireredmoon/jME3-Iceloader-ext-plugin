@@ -51,6 +51,10 @@
                 <runtime-relative-path>ext/reflections-0.9.8.jar</runtime-relative-path>
                 <binary-origin>release/modules/ext/reflections-0.9.8.jar</binary-origin>
             </class-path-extension>
+            <class-path-extension>
+                <runtime-relative-path>ext/jasypt-1.9.1.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/jasypt-1.9.1.jar</binary-origin>
+            </class-path-extension>
         </data>
     </configuration>
 </project>
