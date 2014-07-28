@@ -6,7 +6,7 @@
     <description>Builds, tests, and runs the project icemoon.iceloaderext.</description>
     <import file="nbproject/build-impl.xml"/>
 
-    <target name="release" depends="files-init,javadoc" if="has.release.dir">
+    <target name="release" depends="files-init,javadoc">
         
         <echo>Creating releases folder (classes, source and Javadoc archives)</echo>  
         <zip basedir="build/javadoc" file="release/docs/Iceloader-Ext-javadoc.zip"/>        
