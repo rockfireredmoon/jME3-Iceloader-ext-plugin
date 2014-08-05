@@ -56,7 +56,6 @@ public class ReflectionsClasspathLocator extends com.jme3.asset.plugins.Classpat
     public ReflectionsClasspathLocator() {
     }
 
-    @Override
     public AssetIndex getIndex(AssetManager assetManager) {
         if (!loadedAssetIndex) {
             assetIndex = new AssetIndex(assetManager);
