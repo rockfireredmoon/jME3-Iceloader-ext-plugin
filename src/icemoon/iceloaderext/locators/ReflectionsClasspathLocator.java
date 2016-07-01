@@ -29,51 +29,56 @@
  */
 package icemoon.iceloaderext.locators;
 
-import icemoon.iceloader.IndexedAssetLocator;
-import com.jme3.asset.AssetManager;
-import java.util.logging.Logger;
 import icemoon.iceloader.AssetIndex;
 import icemoon.iceloader.IndexItem;
+import icemoon.iceloader.IndexedAssetLocator;
+
 import java.net.URL;
 import java.util.Set;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
+
 import org.reflections.Reflections;
 import org.reflections.scanners.ResourcesScanner;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 
+import com.jme3.asset.AssetManager;
+
 /**
- * Locator that locates assets on the classpath, much like {@link ReflectionsClasspathLocator}, but
+ * Locator that locates assets on the classpath, much like
+ * {@link ReflectionsClasspathLocator}, but
  * also provides an index of all classpath resources too.
  */
 public class ReflectionsClasspathLocator extends com.jme3.asset.plugins.ClasspathLocator implements IndexedAssetLocator {
 
-    private boolean loadedAssetIndex;
-    private static final Logger LOG = Logger.getLogger(ReflectionsClasspathLocator.class.getName());
-    private AssetIndex assetIndex;
+	private boolean loadedAssetIndex;
+	private static final Logger LOG = Logger.getLogger(ReflectionsClasspathLocator.class.getName());
+	private AssetIndex assetIndex;
 
-    public ReflectionsClasspathLocator() {
-    }
+	public ReflectionsClasspathLocator() {
+	}
 
-    public AssetIndex getIndex(AssetManager assetManager) {
-        if (!loadedAssetIndex) {
-            assetIndex = new AssetIndex(assetManager);
-            final Set<URL> jars = ClasspathHelper.forClassLoader(getClass().getClassLoader());
-            if (LOG.isLoggable(Level.FINE)) {
-                LOG.fine(String.format("Indexing from jars %s", jars));
-            }
-            Reflections reflections = new Reflections(new ConfigurationBuilder()
-                    .addUrls(jars)
-                    .setScanners(new ResourcesScanner()));
-            for (String s : reflections.getResources(Pattern.compile(".*"))) {
-                if (LOG.isLoggable(Level.FINE)) {
-                    LOG.fine(String.format("    %s", s));
-                }
-                assetIndex.getBackingObject().add(new IndexItem(s));
-            }
-            loadedAssetIndex = true;
-        }
-        return assetIndex;
-    }
+	public AssetIndex getIndex(AssetManager assetManager) {
+		if (!loadedAssetIndex) {
+			assetIndex = new AssetIndex(assetManager);
+			final Set<URL> jars = ClasspathHelper.forClassLoader(getClass().getClassLoader());
+			if (LOG.isLoggable(Level.FINE)) {
+				LOG.fine(String.format("Indexing from jars %s", jars));
+			}
+			Reflections reflections = new Reflections(new ConfigurationBuilder().addUrls(jars).setScanners(new ResourcesScanner()));
+			long lastModified = 0;
+			for (String s : reflections.getResources(Pattern.compile(".*"))) {
+				if (LOG.isLoggable(Level.FINE)) {
+					LOG.fine(String.format("    %s", s));
+				}
+				lastModified += s.hashCode();
+				assetIndex.getBackingObject().add(new IndexItem(s));
+			}
+			assetIndex.configure(lastModified, getClass().getSimpleName().toLowerCase() + "://" + AssetIndex.DEFAULT_RESOURCE_NAME);
+			loadedAssetIndex = true;
+		}
+		return assetIndex;
+	}
 }

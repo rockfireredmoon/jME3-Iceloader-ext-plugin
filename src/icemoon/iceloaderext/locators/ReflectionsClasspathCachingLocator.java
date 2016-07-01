@@ -29,16 +29,19 @@
  */
 package icemoon.iceloaderext.locators;
 
+import icemoon.iceloader.CachingAssetInfo;
+import icemoon.iceloader.locators.AssetCacheLocator;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.apache.commons.vfs2.FileObject;
+
 import com.jme3.asset.AssetInfo;
 import com.jme3.asset.AssetKey;
 import com.jme3.asset.AssetLocator;
 import com.jme3.asset.AssetManager;
 import com.jme3.asset.plugins.ClasspathLocator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.commons.vfs2.FileObject;
-import icemoon.iceloader.CachingAssetInfo;
-import icemoon.iceloader.locators.AssetCacheLocator;
 
 /**
  * Locator that locates assets on the classpath, much like {@link ClasspathLocator},
