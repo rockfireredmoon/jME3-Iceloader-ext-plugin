@@ -74,7 +74,7 @@ public class ReflectionsClasspathLocator extends com.jme3.asset.plugins.Classpat
 					LOG.fine(String.format("    %s", s));
 				}
 				lastModified += s.hashCode();
-				assetIndex.getBackingObject().add(new IndexItem(s));
+				assetIndex.getBackingObject().add(new IndexItem(s, 0));
 			}
 			assetIndex.configure(lastModified, getClass().getSimpleName().toLowerCase() + "://" + AssetIndex.DEFAULT_RESOURCE_NAME);
 			loadedAssetIndex = true;
