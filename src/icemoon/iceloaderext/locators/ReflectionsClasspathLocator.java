@@ -29,12 +29,8 @@
  */
 package icemoon.iceloaderext.locators;
 
-import icemoon.iceloader.AssetIndex;
-import icemoon.iceloader.IndexItem;
-import icemoon.iceloader.IndexedAssetLocator;
-
 import java.net.URL;
-import java.util.Set;
+import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -45,6 +41,10 @@ import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 
 import com.jme3.asset.AssetManager;
+
+import icemoon.iceloader.AssetIndex;
+import icemoon.iceloader.IndexItem;
+import icemoon.iceloader.IndexedAssetLocator;
 
 /**
  * Locator that locates assets on the classpath, much like
@@ -63,7 +63,7 @@ public class ReflectionsClasspathLocator extends com.jme3.asset.plugins.Classpat
 	public AssetIndex getIndex(AssetManager assetManager) {
 		if (!loadedAssetIndex) {
 			assetIndex = new AssetIndex(assetManager);
-			final Set<URL> jars = ClasspathHelper.forClassLoader(getClass().getClassLoader());
+			final Collection<URL> jars = ClasspathHelper.forClassLoader(getClass().getClassLoader());
 			if (LOG.isLoggable(Level.FINE)) {
 				LOG.fine(String.format("Indexing from jars %s", jars));
 			}
